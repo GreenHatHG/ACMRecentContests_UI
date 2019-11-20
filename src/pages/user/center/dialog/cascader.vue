@@ -35,7 +35,6 @@
 
     methods: {
       handleChange (value) {
-        console.log(value)
         let s = ''
         let len = value.length
         value.forEach(function (item) {

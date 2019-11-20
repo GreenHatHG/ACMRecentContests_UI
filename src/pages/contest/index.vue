@@ -1,17 +1,17 @@
 <template>
   <d2-container>
     <d2-crud
-    ref="d2Crud"
-    :columns="columns"
-    :data="tableData"
-    :options="options"
-    :loading="loading"/>
+      ref="d2Crud"
+      :columns="columns"
+      :data="tableData"
+      :options="options"
+      :loading="loading"/>
   </d2-container>
 </template>
 
 <script>
-import axios from 'axios'
-import button from './button'
+  import axios from 'axios'
+  import button from './button'
 
   export default{
     components:{
@@ -25,15 +25,16 @@ import button from './button'
           {
             key: 'oj', title: '平台', minWidth: 60, align: 'center', resizable: true,
             filters: [
-            { text: '计蒜客', value: '计蒜客' },
-            { text: 'NowCoder', value: 'NowCoder' },
-            { text: 'CodeForces', value: 'CoderForces' },
-            { text: 'CodeChef', value: 'CodeChef' },
-            { text: 'Atcoder', value: 'Atcoder' }
+              { text: 'Atcoder', value: 'Atcoder' },
+              { text: 'Bestcoder', value: 'Bestcoder' },
+              { text: 'CodeChef', value: 'CodeChef' },
+              { text: 'CodeForces', value: 'CoderForces' },
+              { text: 'Hdu', value: 'Hdu' },
+              { text: 'Luogu', value: 'Luogu' },
+              { text: '牛客', value: '牛客' },
+              { text: '计蒜客', value: '计蒜客' }
             ],
             filterMethod (value, row) {
-              console.log(value);
-              console.log(row);
                return row.oj === value
             },
             filterPlacement: 'bottom-end'
@@ -65,12 +66,11 @@ import button from './button'
     },
     methods: {
       getData(){
-        let api = 'https://greenhathg.co/api/contests'
+        let api = 'https://greenhathg.co/api/v1/contests'
         axios.get(api).then((response)=>{
           this.loading = false
-          this.tableData=response.data;
+          this.tableData=response.data.data;
         }).catch((error)=>{
-          console.log(error);
         }).finally(()=>{
         });
       }
@@ -90,7 +90,7 @@ import button from './button'
 
 </script>
 
-<style>
+<style scoped>
 
   .el-table .warning-row {
     background: oldlace;

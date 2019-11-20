@@ -12,9 +12,8 @@
               <el-tab-pane label="账户设置" name="account">
                 <account />
               </el-tab-pane>
-              <el-tab-pane label="收藏中心" name="a">
-              </el-tab-pane>
               <el-tab-pane label="提醒管理" name="ac">
+                <remind/>
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -27,6 +26,7 @@
 <script>
   import userCard from './components/user_card'
   import account from './components/account'
+  import remind from './components/remind/remind'
   export default{
     data(){
       return{
@@ -34,7 +34,7 @@
       }
     },
     components:{
-      userCard, account
+      userCard, account, remind
     }
   }
 </script>

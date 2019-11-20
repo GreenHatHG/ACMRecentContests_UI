@@ -52,3 +52,12 @@ import D2Crud from '@d2-projects/d2-crud'
 
 Vue.use(ElementUI)
 Vue.use(D2Crud)
+
+let EventBus=new Vue();
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get: function () {
+      return EventBus
+    }
+  }
+})

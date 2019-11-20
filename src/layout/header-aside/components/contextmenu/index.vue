@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .d2-contextmenu {
   position: absolute;
   padding: 5px 0;

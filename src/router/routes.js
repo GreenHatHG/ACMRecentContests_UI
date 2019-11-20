@@ -30,15 +30,14 @@ const frameIn = [
           auth: true
         }
       },
-      // 系统 前端日志
       {
-        path: 'log',
-        name: 'log',
+        path: 'user/remind',
+        name: 'user_remind',
+        component: () => import('@/pages/user/remind'),
         meta: {
-          title: '前端日志',
+          title: '赛事提醒',
           auth: true
-        },
-        component: _import('system/log')
+        }
       },
       // 刷新页面 必须保留
       {

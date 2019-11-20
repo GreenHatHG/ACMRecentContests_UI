@@ -57,10 +57,13 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
         }).then(({ value }) => {
+          if(value.length >= 30){
+            this.$message.error("用户名不能超过30个字符")
+            return
+          }
           updateUserName({
               username: value
           }).then(res =>{
-            console.log(res)
             this.$message.success('你的姓名更新为: ' + value)
             this.$store.dispatch('d2admin/user/set', {
               name: value,

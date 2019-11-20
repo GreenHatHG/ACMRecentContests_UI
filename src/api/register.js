@@ -1,13 +1,9 @@
 import request from '@/plugin/axios'
 
-export function register(data, code) {
-    let url = '/register';
-    if(code !== null){
-        url = url + "?code=" + code;
-    }
+export function register(data) {
     return request({
-        url: url,
+        url: '/register',
         method: 'post',
-        data
+        params: data
     })
 }

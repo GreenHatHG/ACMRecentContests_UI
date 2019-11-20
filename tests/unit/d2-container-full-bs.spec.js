@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import D2ContainerFullBs from '@/components/d2-container/components/d2-container-full-bs.vue'
+import D2ContainerFullBs from '@/dialog/d2-container/dialog/d2-container-full-bs.vue'
 
 describe('d2-container-full-bs', () => {
   // 存在且是Vue组件实例

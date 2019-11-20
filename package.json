@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@d2-projects/d2-crud": "^2.1.1",
+    "ant-design-vue": "^1.4.3",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "better-scroll": "^1.15.2",

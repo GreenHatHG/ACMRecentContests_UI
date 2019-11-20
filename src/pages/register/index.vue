@@ -29,30 +29,30 @@
             <el-card shadow="never">
               <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
                 <el-form-item prop="username">
-                  <el-input type="text" v-model="formLogin.username" placeholder="用户名">
+                  <el-input type="text" v-model="formLogin.username" placeholder="用户名" maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-user-circle-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                  <el-input type="password" v-model="formLogin.password" placeholder="密码" clearable show-password>
+                  <el-input type="password" v-model="formLogin.password" placeholder="密码" clearable show-password maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password_confirm">
-                  <el-input type="password" v-model="formLogin.password_confirm" placeholder="确认密码" clearable show-password>
+                  <el-input type="password" v-model="formLogin.password_confirm" placeholder="确认密码" clearable show-password maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="mail">
-                  <el-input type="text" v-model="formLogin.mail" placeholder="邮箱">
+                  <el-input type="text" v-model="formLogin.mail" placeholder="邮箱" maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-envelope-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
-                  <el-input type="text" v-model="formLogin.code" placeholder="验证码">
+                  <el-input type="text" v-model="formLogin.code" placeholder="验证码" maxlength="6" show-word-limit>
                     <i slot="prepend" class="fa fa-dot-circle-o"></i>
                     <template slot="append" >
-                      <el-button size="default" @click="getVerificationCode" type="primary" :class="{disabled: !this.canClick}">{{content}}</el-button>
+                      <el-button size="default" @click="getVerificationCode" type="primary" :class="{disabled: !this.canClick}" :loading="lodingState">{{content}}</el-button>
                     </template>
                   </el-input>
                 </el-form-item>
@@ -129,7 +129,8 @@ export default {
       },
       content: '发送验证码',
       totalTime: 60,
-      canClick: true
+      canClick: true,
+      lodingState: false
     }
   },
   mounted () {
@@ -151,14 +152,14 @@ export default {
           register({
             username: this.formLogin.username,
             password: this.formLogin.password,
-            mail: this.formLogin.mail
-          }, this.formLogin.code).then(res =>{
+            mail: this.formLogin.mail,
+            code: this.formLogin.code
+          }).then(res =>{
             this.loginingRegister = false
             this.$message.success("注册成功")
             this.$router.push({path:'/login'})
           }).catch(err =>{
             this.loginingRegister = false
-            console.log(err)
           })
         }else{
           this.$message.error("提交失败,请检查是否有未符合要求的信息")
@@ -166,10 +167,10 @@ export default {
       });
     },
     getVerificationCode(){
+      this.lodingState = true
       if (!this.canClick) return
       this.canClick = false
       let s = this.isEmail(this.formLogin.mail)
-      console.log(s)
       if(s !== ''){
         this.$message.error(s)
         return
@@ -179,6 +180,7 @@ export default {
         mail: this.formLogin.mail,
         type: 'register'
       }).then(res => {
+        this.lodingState = false
         this.$message.success("发送到邮箱成功，如果没有收到，请检查垃圾箱")
         this.content = this.totalTime + 's后重试'
         let clock = window.setInterval(() => {
@@ -192,6 +194,7 @@ export default {
           }
         }, 1000)
       }).catch(err =>{
+        this.lodingState = false
         this.canClick = true
       })
     },

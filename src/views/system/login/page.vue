@@ -29,17 +29,17 @@
             <el-card shadow="never">
               <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
                 <el-form-item prop="username">
-                  <el-input type="text" v-model="formLogin.username" placeholder="用户名/邮箱">
+                  <el-input type="text" v-model="formLogin.username" placeholder="用户名/邮箱" maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-user-circle-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                  <el-input type="password" v-model="formLogin.password" placeholder="密码" show-password>
+                  <el-input type="password" v-model="formLogin.password" placeholder="密码" show-password maxlength="30" show-word-limit>
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
-                  <el-input type="text" v-model="formLogin.code" placeholder="- - - -">
+                  <el-input type="text" v-model="formLogin.code" placeholder="- - - -" maxlength="6" show-word-limit>
                     <template slot="prepend">验证码</template>
                     <template slot="append">
                       <img @click='clickImg' class="login-code" :src="'data:image/png;base64,'+imgUrl">
